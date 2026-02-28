@@ -38,8 +38,8 @@ const ProductsSection = () => {
     <section id="products" className="relative py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold font-mono tracking-tight text-foreground mb-4">Shadow Layer Ecosystem
-            <span className="text-primary text-glow"></span> Ecosystem
+          <h2 className="text-3xl md:text-4xl font-bold font-mono tracking-tight text-foreground mb-4">
+            Shadow Layer <span className="text-primary text-glow">Ecosystem</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             A suite of privacy tools engineered for those who cannot afford to be seen.
@@ -53,8 +53,8 @@ const ProductsSection = () => {
               <Card
                 key={product.name}
                 className={`relative border transition-all duration-300 ${product.available ?
-                    "border-primary/40 bg-primary/5 box-glow hover:border-primary/60" :
-                    "border-border/50 bg-card/50 opacity-60 hover:opacity-75"}`
+                  "border-primary/40 bg-primary/5 box-glow hover:border-primary/60" :
+                  "border-border/50 bg-card/50 opacity-60 hover:opacity-75"}`
                 }>
 
                 {!product.available &&
@@ -71,8 +71,8 @@ const ProductsSection = () => {
                   </div>
                   <Badge
                     className={`w-fit text-[10px] font-mono tracking-widest ${product.available ?
-                        "bg-primary/20 text-primary border-primary/30 hover:bg-primary/30" :
-                        "bg-muted text-muted-foreground border-border hover:bg-muted"}`
+                      "bg-primary/20 text-primary border-primary/30 hover:bg-primary/30" :
+                      "bg-muted text-muted-foreground border-border hover:bg-muted"}`
                     }
                     variant="outline">
 

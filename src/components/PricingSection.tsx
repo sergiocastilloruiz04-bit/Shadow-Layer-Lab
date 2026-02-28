@@ -60,15 +60,19 @@ const plans = [
 const PricingSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setIsError(false);
+    setIsSuccess(false);
 
     const formData = new FormData(e.currentTarget);
 
     try {
-      const res = await fetch("https://formsubmit.co/ajax/sergiocastilloruiz04.ghostnet@gmail.com", {
+      const res = await fetch("https://formsubmit.co/ajax/sergiocastilloruiz04+ghostnet@gmail.com", {
         method: "POST",
         body: formData,
       });
@@ -76,14 +80,22 @@ const PricingSection = () => {
       if (res.ok) {
         setIsSuccess(true);
         e.currentTarget.reset();
-        setTimeout(() => {
-          setIsSuccess(false);
-        }, 5000);
+      } else {
+        setIsError(true);
       }
     } catch (error) {
       console.error(error);
+      setIsError(true);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    if (!open) {
+      setIsSuccess(false);
+      setIsError(false);
     }
   };
 
@@ -135,7 +147,7 @@ const PricingSection = () => {
               </CardContent>
               <CardFooter>
                 {plan.cta === "Contact Us" ? (
-                  <Dialog>
+                  <Dialog open={isOpen} onOpenChange={handleOpenChange}>
                     <DialogTrigger asChild>
                       <Button
                         className={`w-full font-mono tracking-wider text-sm uppercase ${plan.highlighted ?
@@ -185,14 +197,20 @@ const PricingSection = () => {
 
                         <Button
                           type="submit"
-                          disabled={isSubmitting || isSuccess}
+                          disabled={isSubmitting}
                           className="w-full font-mono mt-4 box-glow bg-primary text-primary-foreground hover:bg-primary/90 transition-all">
-                          {isSubmitting ? "Encrypting via HTTPS..." : isSuccess ? "Payload Delivered ✓" : "Transmit Message"}
+                          {isSubmitting ? "Encrypting via HTTPS..." : "Transmit Message"}
                         </Button>
 
                         {isSuccess && (
                           <p className="text-xs text-primary text-center mt-2 font-mono">
-                            Message safely transmitted to sergiocastilloruiz04.ghostnet@gmail.com
+                            Mensaje enviado correctamente ✓
+                          </p>
+                        )}
+
+                        {isError && (
+                          <p className="text-xs text-destructive text-center mt-2 font-mono">
+                            Error al enviar el mensaje. Inténtalo de nuevo.
                           </p>
                         )}
                       </form>
