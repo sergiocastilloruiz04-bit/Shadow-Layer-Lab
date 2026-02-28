@@ -10,13 +10,7 @@ const HeroSection = () => {
         <Globe />
       </div>
 
-      {/* Radial glow */}
-      <div
-        className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, hsl(160 100% 45% / 0.3) 0%, transparent 70%)",
-          animation: "pulse-glow 4s ease-in-out infinite"
-        }} />
+
 
       {/* Text Content (Left) */}
       <div className="relative z-10 text-left max-w-2xl w-full">
@@ -32,7 +26,7 @@ const HeroSection = () => {
           style={{ animation: "flicker 8s infinite" }}>
           Invisible.<br />
           Untraceable.<br />
-          <span className="bg-[#ec1313]/0 text-primary-foreground">Shadow Layer Lab</span>
+          <span className="bg-[#ec1313]/0 text-primary-foreground whitespace-nowrap">Shadow Layer Lab</span>
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-10 leading-relaxed">
