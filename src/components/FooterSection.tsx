@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-import { Ghost } from "lucide-react";
+import { Shield } from "lucide-react";
 
 const FooterSection = () => {
   return (
@@ -8,8 +8,8 @@ const FooterSection = () => {
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-2">
-            <Ghost className="w-5 h-5 text-primary" />
-            <span className="font-mono font-bold text-foreground tracking-wider">GHOSTNET</span>
+            <Shield className="w-5 h-5 text-primary" />
+            <span className="font-mono font-bold text-foreground tracking-wider">SHADOW LAYER LAB</span>
           </div>
 
           <nav className="flex items-center gap-8">
@@ -36,7 +36,7 @@ const FooterSection = () => {
 
         <div className="mt-10 text-center">
           <p className="text-xs text-muted-foreground font-mono">
-            © {new Date().getFullYear()} GhostNet. All communications are encrypted. Your identity is yours.
+            © {new Date().getFullYear()} Shadow Layer Lab. All communications are encrypted. Your identity is yours.
           </p>
         </div>
       </div>

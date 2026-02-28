@@ -47,9 +47,9 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        ghost: {
-          glow: "hsl(var(--ghost-glow))",
-          cyan: "hsl(var(--ghost-cyan))",
+        shadow: {
+          crimson: "hsl(var(--shadow-crimson))",
+          deep: "hsl(var(--shadow-deep))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -64,7 +64,8 @@ export default {
       },
       fontFamily: {
         mono: ['"JetBrains Mono"', 'monospace'],
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Sora', 'Inter', 'sans-serif'],
+        display: ['Sora', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

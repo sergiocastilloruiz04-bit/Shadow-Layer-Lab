@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 
 const plans = [
   {
-    name: "Ghost Free",
+    name: "Anon Free",
     price: "$0",
     period: "forever",
     description: "Essential protection for individual use",
@@ -20,7 +20,7 @@ const plans = [
     highlighted: false,
   },
   {
-    name: "Pro Journalist",
+    name: "Pro Correspondent",
     price: "$29",
     period: "/month",
     description: "For high-risk individuals in the field",
@@ -32,7 +32,7 @@ const plans = [
       "Multi-device sync",
       "Priority encrypted relay",
     ],
-    cta: "Go Ghost",
+    cta: "Go Dark",
     highlighted: true,
   },
   {
@@ -58,11 +58,11 @@ const PricingSection = () => {
     <section id="pricing" className="relative py-24 px-6">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold font-mono tracking-tight text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display tracking-tight text-foreground mb-4">
             Choose Your <span className="text-primary text-glow">Cover</span>
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
-            GhostNet Messaging plans. All tiers include end-to-end encryption by default.
+            GhostNet Messenger plans. All tiers include end-to-end encryption by default.
           </p>
         </div>
 
@@ -70,10 +70,10 @@ const PricingSection = () => {
           {plans.map((plan) => (
             <Card
               key={plan.name}
-              className={`relative flex flex-col border transition-all duration-300 ${
+              className={`relative flex flex-col rounded-xl transition-all duration-300 ${
                 plan.highlighted
-                  ? "border-primary/50 bg-primary/5 box-glow scale-[1.02]"
-                  : "border-border/50 bg-card hover:border-border"
+                  ? "glass-card-active box-glow scale-[1.02]"
+                  : "glass-card hover:border-border/80"
               }`}
             >
               {plan.highlighted && (
@@ -86,7 +86,7 @@ const PricingSection = () => {
               <CardHeader className="pb-2">
                 <CardTitle className="font-mono text-lg">{plan.name}</CardTitle>
                 <div className="mt-3">
-                  <span className="text-4xl font-bold font-mono text-foreground">{plan.price}</span>
+                  <span className="text-4xl font-bold font-display text-foreground">{plan.price}</span>
                   <span className="text-muted-foreground text-sm ml-1">{plan.period}</span>
                 </div>
                 <p className="text-sm text-muted-foreground mt-2">{plan.description}</p>
