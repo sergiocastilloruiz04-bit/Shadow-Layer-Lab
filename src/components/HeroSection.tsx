@@ -1,24 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Shield } from "lucide-react";
+import { Globe } from "./Globe";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Grid background */}
-      <div className="absolute inset-0 grid-bg opacity-50" />
-      
-      {/* Scanline overlay */}
-      <div className="absolute inset-0 scanline pointer-events-none" />
-      
+      {/* Globe background */}
+      <div className="absolute inset-0 flex items-center justify-center md:justify-end opacity-[0.85] pointer-events-none mix-blend-screen translate-y-24 md:translate-y-0 md:translate-x-24 scale-[1.3] md:scale-[1.1]">
+        <Globe />
+      </div>
+
       {/* Radial glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 pointer-events-none"
         style={{
           background: "radial-gradient(circle, hsl(160 100% 45% / 0.3) 0%, transparent 70%)",
           animation: "pulse-glow 4s ease-in-out infinite"
         }} />
-
-
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 mb-8">
           <Shield className="w-4 h-4 text-primary" />
@@ -36,8 +34,8 @@ const HeroSection = () => {
           <span className="bg-[#ec1313]/0 text-primary-foreground">Shadow Layer Lab</span>
         </h1>
 
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">Built for war correspondents, whistleblowers, and high-risk professionals who operate where privacy is not a luxury 
-it's survival.
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">Built for war correspondents, whistleblowers, and high-risk professionals who operate where privacy is not a luxury
+          it's survival.
 
         </p>
 
