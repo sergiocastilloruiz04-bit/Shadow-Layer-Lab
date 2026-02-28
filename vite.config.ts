@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "https://github.com/sergiocastilloruiz04-bit/Shadow-Layer-Lab.git", // <-- AÑADE ESTA LÍNEA (cámbialo por el nombre real de tu repositorio de GitHub)
+  base: "/Shadow-Layer-Lab/", // <-- Ruta base para GitHub Pages (nombre del repositorio)
   server: {
     host: "::",
     port: 8080,
