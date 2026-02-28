@@ -39,7 +39,7 @@ const ProductsSection = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-mono tracking-tight text-foreground mb-4">Shadow Layer Ecosystem
-            <span className="text-primary text-glow">Ghost</span> Ecosystem
+            <span className="text-primary text-glow"></span> Ecosystem
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             A suite of privacy tools engineered for those who cannot afford to be seen.

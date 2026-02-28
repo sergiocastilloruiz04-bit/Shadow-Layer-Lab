@@ -33,7 +33,7 @@ const HeroSection = () => {
 
           Invisible.<br />
           Untraceable.<br />
-          <span className="text-ghost-cyan">Shadow Layer Lab</span>
+          <span className="bg-[#ec1313]/0 text-primary-foreground">Shadow Layer Lab</span>
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">Built for war correspondents, whistleblowers, and high-risk professionals who operate where privacy is not a luxury 
