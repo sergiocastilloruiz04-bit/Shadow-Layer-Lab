@@ -4,15 +4,21 @@ import ReactGlobe from 'react-globe.gl';
 export function Globe() {
     const globeEl = useRef<any>();
     const [arcsData, setArcsData] = useState<any[]>([]);
+    const [countries, setCountries] = useState({ features: [] });
 
     useEffect(() => {
         // Configure rotation and POV
         if (globeEl.current) {
             globeEl.current.controls().autoRotate = true;
-            globeEl.current.controls().autoRotateSpeed = 1.0;
+            globeEl.current.controls().autoRotateSpeed = 0.8;
             globeEl.current.controls().enableZoom = false;
-            globeEl.current.pointOfView({ altitude: 2 });
+            globeEl.current.pointOfView({ altitude: 2.2 });
         }
+
+        // Fetch geojson for country borders
+        fetch('https://raw.githubusercontent.com/vasturiano/react-globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
+            .then(res => res.json())
+            .then(setCountries);
 
         // High risk / military-like coordinates
         const nodes = [
@@ -31,7 +37,7 @@ export function Globe() {
 
         // Generate lines connecting them randomly
         const arcs = [];
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 25; i++) {
             const source = nodes[Math.floor(Math.random() * nodes.length)];
             const target = nodes[Math.floor(Math.random() * nodes.length)];
             if (source !== target) {
@@ -40,7 +46,7 @@ export function Globe() {
                     startLng: source.lng,
                     endLat: target.lat,
                     endLng: target.lng,
-                    color: ['#ffffff', '#00ff41', '#00ff41', '#ff003c'][Math.floor(Math.random() * 4)],
+                    color: ['#ffffff', '#ffffff', '#aaaaaa'][Math.floor(Math.random() * 3)],
                 });
             }
         }
@@ -51,22 +57,29 @@ export function Globe() {
         <div className="w-full h-full flex items-center justify-center cursor-move">
             <ReactGlobe
                 ref={globeEl}
-                width={800}
-                height={800}
+                width={600}
+                height={600}
                 backgroundColor="rgba(0,0,0,0)"
-                // Earth styles: White dots/lines topology for military radar look
+
+                // Wireframe earth without grid
+                showGlobe={false}
                 showAtmosphere={true}
                 atmosphereColor="#ffffff"
                 atmosphereAltitude={0.15}
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+
+                // Draw country borders
+                polygonsData={countries.features}
+                polygonCapColor={() => 'rgba(0,0,0,0)'}
+                polygonSideColor={() => 'rgba(0,0,0,0)'}
+                polygonStrokeColor={() => '#ffffff'}
 
                 // Arc styles
                 arcsData={arcsData}
                 arcColor="color"
                 arcDashLength={0.4}
-                arcDashGap={0.1}
+                arcDashGap={0.2}
                 arcDashInitialGap={() => Math.random()}
-                arcDashAnimateTime={1500}
+                arcDashAnimateTime={2000}
                 arcStroke={0.5}
             />
         </div>
