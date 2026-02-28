@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/ghostnet-secure-26/", // <-- Ruta base para GitHub Pages (nombre del repositorio)
+  base: "/Shadow-Layer-Lab/", // <-- Ruta base para GitHub Pages (nombre del repositorio)
   server: {
     host: "::",
     port: 8080,
