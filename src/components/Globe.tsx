@@ -1,58 +1,73 @@
-import { useEffect, useRef } from 'react';
-import createGlobe from 'cobe';
+import { useEffect, useRef, useState } from 'react';
+import ReactGlobe from 'react-globe.gl';
 
 export function Globe() {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const globeEl = useRef<any>();
+    const [arcsData, setArcsData] = useState<any[]>([]);
 
     useEffect(() => {
-        let phi = 0;
+        // Configure rotation and POV
+        if (globeEl.current) {
+            globeEl.current.controls().autoRotate = true;
+            globeEl.current.controls().autoRotateSpeed = 1.0;
+            globeEl.current.controls().enableZoom = false;
+            globeEl.current.pointOfView({ altitude: 2 });
+        }
 
-        if (!canvasRef.current) return;
+        // High risk / military-like coordinates
+        const nodes = [
+            { lat: 37.7595, lng: -122.4367 }, // SF
+            { lat: 40.7128, lng: -74.006 },   // NY
+            { lat: 51.5072, lng: -0.1276 },   // LDN
+            { lat: 52.5200, lng: 13.4050 },   // BER
+            { lat: 35.6895, lng: 139.6917 },  // TOK
+            { lat: 1.3521, lng: 103.8198 },   // SIN
+            { lat: -33.8688, lng: 151.2093 }, // SYD
+            { lat: 48.8566, lng: 2.3522 },    // PAR
+            { lat: 55.7558, lng: 37.6173 },   // MOW
+            { lat: 35.6892, lng: 51.3890 },   // TEH
+            { lat: 30.0444, lng: 31.2357 },   // CAI
+        ];
 
-        const globe = createGlobe(canvasRef.current, {
-            devicePixelRatio: 2,
-            width: 600 * 2,
-            height: 600 * 2,
-            phi: 0,
-            theta: 0.3,
-            dark: 1,
-            diffuse: 1.2,
-            mapSamples: 16000,
-            mapBrightness: 6,
-            baseColor: [0.1, 0.1, 0.1], // Dark gray body
-            markerColor: [0, 0.8, 0.4], // Primary green tone
-            glowColor: [0.05, 0.1, 0.05], // Subtle green glow
-            markers: [
-                // Simulated secure node locs (approx)
-                { location: [37.7595, -122.4367], size: 0.03 },
-                { location: [40.7128, -74.006], size: 0.1 },
-                { location: [51.5072, -0.1276], size: 0.05 },
-                { location: [52.5200, 13.4050], size: 0.08 },
-                { location: [35.6895, 139.6917], size: 0.07 },
-                { location: [1.3521, 103.8198], size: 0.05 },
-                { location: [-33.8688, 151.2093], size: 0.06 },
-                { location: [48.8566, 2.3522], size: 0.04 },
-                { location: [55.7558, 37.6173], size: 0.09 }, // High risk areas
-                { location: [35.6892, 51.3890], size: 0.08 },
-            ],
-            onRender: (state) => {
-                // Called on every animation frame.
-                state.phi = phi;
-                phi += 0.005; // speed
-            },
-        });
-
-        return () => {
-            globe.destroy();
-        };
+        // Generate lines connecting them randomly
+        const arcs = [];
+        for (let i = 0; i < 20; i++) {
+            const source = nodes[Math.floor(Math.random() * nodes.length)];
+            const target = nodes[Math.floor(Math.random() * nodes.length)];
+            if (source !== target) {
+                arcs.push({
+                    startLat: source.lat,
+                    startLng: source.lng,
+                    endLat: target.lat,
+                    endLng: target.lng,
+                    color: ['#ffffff', '#00ff41', '#00ff41', '#ff003c'][Math.floor(Math.random() * 4)],
+                });
+            }
+        }
+        setArcsData(arcs);
     }, []);
 
     return (
-        <div className="w-full h-full max-w-[600px] max-h-[600px] aspect-square m-auto relative z-0 opacity-80 mix-blend-screen pointer-events-none">
-            <canvas
-                ref={canvasRef}
-                className="w-full h-full object-contain"
-                style={{ width: "100%", height: "100%" }}
+        <div className="w-full h-full flex items-center justify-center cursor-move">
+            <ReactGlobe
+                ref={globeEl}
+                width={800}
+                height={800}
+                backgroundColor="rgba(0,0,0,0)"
+                // Earth styles: White dots/lines topology for military radar look
+                showAtmosphere={true}
+                atmosphereColor="#ffffff"
+                atmosphereAltitude={0.15}
+                globeImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+
+                // Arc styles
+                arcsData={arcsData}
+                arcColor="color"
+                arcDashLength={0.4}
+                arcDashGap={0.1}
+                arcDashInitialGap={() => Math.random()}
+                arcDashAnimateTime={1500}
+                arcStroke={0.5}
             />
         </div>
     );
