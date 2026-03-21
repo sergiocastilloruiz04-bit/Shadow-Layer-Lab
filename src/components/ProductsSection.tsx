@@ -11,21 +11,21 @@ const products = [
     available: true
   },
   {
-    name: "ShadowMail",
+    name: "OnyxMail",
     tagline: "Zero-knowledge email with self-destructing messages",
     icon: Mail,
     status: "COMING SOON",
     available: false
   },
   {
-    name: "ShadowVPN",
+    name: "Phalanx Tunnel",
     tagline: "Multi-hop routing through conflict-zone optimized servers",
     icon: Shield,
     status: "WORK IN PROGRESS",
     available: false
   },
   {
-    name: "ShadowDrive",
+    name: "Cryptic Vault",
     tagline: "Encrypted cloud storage with dead-man's switch",
     icon: HardDrive,
     status: "COMING SOON",
