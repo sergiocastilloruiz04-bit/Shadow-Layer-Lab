@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import qrCode from "@/qr-code.svg";
 
 const plans = [
   {
@@ -203,6 +204,28 @@ const PricingSection = () => {
                           </p>
                         )}
                       </form>
+                    </DialogContent>
+                  </Dialog>
+                ) : plan.cta === "Get Started" ? (
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        className={`w-full font-mono tracking-wider text-sm uppercase ${plan.highlighted ?
+                          "box-glow" :
+                          "bg-secondary text-secondary-foreground hover:bg-secondary/80"}`
+                        }
+                        variant={plan.highlighted ? "default" : "secondary"}>
+                        {plan.cta}
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md bg-card border-border flex justify-center items-center p-8 [&>button]:text-muted-foreground [&>button:hover]:text-foreground [&>button:hover]:bg-secondary/20">
+                      <div className="flex flex-col items-center gap-6">
+                        <DialogTitle className="font-mono text-xl text-primary text-glow text-center">Ghost Free Access</DialogTitle>
+                        <img src={qrCode} alt="Ghost Free QR Code" className="w-64 h-64 bg-white p-3 rounded-xl border-2 border-primary/20 shadow-lg shadow-primary/10" />
+                        <DialogDescription className="text-center text-muted-foreground text-sm px-4">
+                          Scan the QR code above with your device to get started on the Ghost Free plan.
+                        </DialogDescription>
+                      </div>
                     </DialogContent>
                   </Dialog>
                 ) : (
